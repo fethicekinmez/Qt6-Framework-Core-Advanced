@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
         QHostAddress address = addressList.at(i);
         qInfo() << address.toString();
 
-        qInfo() << "\t LoopBack: " << address.isLoopback(); // true if it is a loobback address, meaning information never goes out to the internet.
+        qInfo() << "\t LoopBack: " << address.isLoopback(); // loopback address, meaning traffic sent to this IP stays on your own machine
         qInfo() << "\t Mulitcast: " << address.isMulticast(); // It's a way to send data to multiple recipients at once
 
         switch(address.protocol()){
