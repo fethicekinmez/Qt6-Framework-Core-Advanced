@@ -8,6 +8,5 @@ int main(int argc, char *argv[])
     Worker worker;
     worker.start();
 
-
     return a.exec();
 }

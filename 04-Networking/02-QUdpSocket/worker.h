@@ -15,7 +15,7 @@ class Worker : public QObject
 
     QUdpSocket socket;
     QTimer timer;
-    quint64 port = 12345;  // Ports < 1024 are admin ports, special services HTTP, FTP, POP3, SMTP
+    quint64 port = 12345;  // Ports < 1024 are admin ports; special services HTTP, FTP, POP3, SMTP
 
 public:
     explicit Worker(QObject *parent = nullptr);
@@ -23,9 +23,10 @@ public:
 signals:
 
 public slots:
-    void start();
-    void stop();
-    void timeout();
+    void start(); // start timer
+    void stop();  // stop timer
+    void timeout(); // timer fires
+
     void readyRead();
     void broadcast();
 };
