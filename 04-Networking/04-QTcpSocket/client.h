@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include <QObject>
+#include <QDebug>
 #include <QTcpSocket>
 #include <QAbstractSocket>
 #include <QMetaEnum>

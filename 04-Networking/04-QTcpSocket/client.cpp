@@ -31,23 +31,20 @@ void Client::disconnect(){
 }
 
 void Client::connected(){
-
     qInfo() << "Connected!";
-    qInfo() << "Sending...";
 
-    socket.write("Hello\r\n");
+    QByteArray request = "Hello\r\n";
+    qInfo() << "Sending... " << request ;
+    socket.write(request);
 
 }
 
 void Client::disconnected(){
-
     qInfo() << "Disconnected";
 
 }
 
 void Client::error(QAbstractSocket::SocketError socketError){
-
-
     qInfo() << socketError << " : " << socket.errorString();
 
 }
