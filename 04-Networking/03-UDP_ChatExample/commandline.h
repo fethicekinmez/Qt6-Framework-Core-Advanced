@@ -8,8 +8,8 @@
 class CommandLine : public QObject
 {
     Q_OBJECT
-
     QTextStream cin;
+
 public:
     explicit CommandLine(QObject *parent = nullptr, FILE *fileHandler = nullptr);
 

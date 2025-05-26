@@ -1,6 +1,5 @@
 #include "commandline.h"
 
-
 CommandLine::CommandLine(QObject *parent , FILE *fileHandler) : QObject{parent}, cin(fileHandler){
 
 }

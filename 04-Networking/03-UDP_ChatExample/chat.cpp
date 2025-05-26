@@ -12,33 +12,6 @@ Chat::Chat(QObject *parent) : QObject{parent}{
 
 }
 
-void Chat::command(QString value){
-
-    QString message = name + ": ";
-    if(name.isEmpty())
-    {
-        name = value;
-        message = name + ": joined";
-        send(message);
-        return;
-    }
-    message.append(value);
-    send(message);
-}
-
-void Chat::send(QString value)
-{
-    QByteArray data = value.toLatin1();
-
-    qint64 bytesWritten = socket.writeDatagram(data.data(), data.size(), QHostAddress::LocalHost, port);
-    if (bytesWritten == -1) {
-        qDebug() << "Failed to send datagram:" << socket.errorString();
-    } else {
-        qInfo() << "\tSend: " << data;
-    }
-
-}
-
 void Chat::readyRead()
 {
     while(socket.hasPendingDatagrams()){
@@ -48,3 +21,32 @@ void Chat::readyRead()
     }
 
 }
+
+void Chat::command(QString value){
+
+    QString message;
+    if(name.isEmpty()) {
+        name = value;
+        message = name + " joined the room!";
+        send(message);
+        return;
+    }
+    message = name + ": ";
+    message.append(value);
+    send(message);
+}
+
+void Chat::send(QString value){
+
+    QByteArray data = value.toLatin1();
+    QNetworkDatagram datagram(data, QHostAddress::Broadcast);
+    qint64 bytesWritten = socket.writeDatagram(datagram.data(), datagram.data().size(), QHostAddress::LocalHost, port);
+
+    if (bytesWritten == -1) {
+        qDebug() << "Failed to send datagram:" << socket.errorString();
+    } else {
+        qInfo() << "\tSend: " << data;
+    }
+
+}
+
